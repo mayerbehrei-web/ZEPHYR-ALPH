@@ -109,7 +109,7 @@ Le bot tourne sous **Node.js** et propose l’authentification via QR Code pour 
 
     ```bash
    git clone https://github.com/mayerbehrei-web/ZEPHYR-ALPH.git
-    cd INFINIX-MD
+    cd ZEPHYR-ALPH
     ```
 
 2. **Installer les dépendances :**
@@ -146,7 +146,7 @@ Ce projet est sous licence [MIT License](https://opensource.org/licenses/MIT) �
 
 ## 📜 Copyright
 
-Copyright (c) 2026 rebelle masque. Tous droits réservés.
+Copyright (c) 2024 Zephyr. Tous droits réservés.
 
 Ce projet contient aussi du code provenant de projets open source :
 - Baileys (Licence MIT)
