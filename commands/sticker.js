@@ -1,16 +1,23 @@
-let downloadMediaMessage;
-
-(async () => {
+// ✅ FIX import Baileys correctement
+async function getDownloadMediaMessage() {
     const baileys = await import('@whiskeysockets/baileys');
-    downloadMediaMessage = baileys.downloadMediaMessage;
-})();
+    return baileys.downloadMediaMessage;
+}
 
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const settings = require('../settings');
-const webp = require('node-webpmux');
 const crypto = require('crypto');
+
+// ✅ FIX node-webpmux fallback
+let webp;
+try {
+    webp = require('node-webpmux');
+} catch (e) {
+    console.warn('⚠️ node-webpmux not installed, skipping EXIF metadata');
+    webp = null;
+}
 
 async function stickerCommand(sock, chatId, message) {
     const messageToQuote = message;
@@ -33,46 +40,27 @@ async function stickerCommand(sock, chatId, message) {
 
     if (!mediaMessage) {
         await sock.sendMessage(chatId, { 
-            text: 'Please reply to an image/video with .sticker, or send an image/video with .sticker as the caption.',
-            contextInfo: {
-                forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363403933773291@newsletter',
-                    newsletterName: '𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇',
-                    serverMessageId: -1
-                }
-            }
-        },{ quoted: messageToQuote });
+            text: 'Reply to an image/video with .sticker'
+        }, { quoted: messageToQuote });
         return;
     }
 
     try {
+        // ✅ FIX utilisation correcte
+        const downloadMediaMessage = await getDownloadMediaMessage();
+
         const mediaBuffer = await downloadMediaMessage(targetMessage, 'buffer', {}, { 
             logger: undefined, 
             reuploadRequest: sock.updateMediaMessage 
         });
 
         if (!mediaBuffer) {
-            await sock.sendMessage(chatId, { 
-                text: 'Failed to download media. Please try again.',
-                contextInfo: {
-                    forwardingScore: 999,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363403933773291@newsletter',
-                        newsletterName: '𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇',
-                        serverMessageId: -1
-                    }
-                }
-            });
+            await sock.sendMessage(chatId, { text: 'Failed to download media.' });
             return;
         }
 
         const tmpDir = path.join(process.cwd(), 'tmp');
-        if (!fs.existsSync(tmpDir)) {
-            fs.mkdirSync(tmpDir, { recursive: true });
-        }
+        if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
 
         const tempInput = path.join(tmpDir, `temp_${Date.now()}`);
         const tempOutput = path.join(tmpDir, `sticker_${Date.now()}.webp`);
@@ -80,12 +68,11 @@ async function stickerCommand(sock, chatId, message) {
         fs.writeFileSync(tempInput, mediaBuffer);
 
         const isAnimated = mediaMessage.mimetype?.includes('gif') || 
-                          mediaMessage.mimetype?.includes('video') || 
-                          mediaMessage.seconds > 0;
+                          mediaMessage.mimetype?.includes('video');
 
         const ffmpegCommand = isAnimated
-            ? `ffmpeg -i "${tempInput}" -vf "scale=512:512:force_original_aspect_ratio=decrease,fps=15,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" -c:v libwebp -preset default -loop 0 -vsync 0 -pix_fmt yuva420p -quality 75 -compression_level 6 "${tempOutput}"`
-            : `ffmpeg -i "${tempInput}" -vf "scale=512:512:force_original_aspect_ratio=decrease,format=rgba,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" -c:v libwebp -preset default -loop 0 -vsync 0 -pix_fmt yuva420p -quality 75 -compression_level 6 "${tempOutput}"`;
+            ? `ffmpeg -i "${tempInput}" -vf "scale=512:512:force_original_aspect_ratio=decrease,fps=15,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" -c:v libwebp -loop 0 "${tempOutput}"`
+            : `ffmpeg -i "${tempInput}" -vf "scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" -c:v libwebp "${tempOutput}"`;
 
         await new Promise((resolve, reject) => {
             exec(ffmpegCommand, (error) => {
@@ -94,28 +81,31 @@ async function stickerCommand(sock, chatId, message) {
             });
         });
 
-        let webpBuffer = fs.readFileSync(tempOutput);
+        let finalBuffer = fs.readFileSync(tempOutput);
 
-        const img = new webp.Image();
-        await img.load(webpBuffer);
+        // ✅ EXIF seulement si dispo
+        if (webp) {
+            try {
+                const img = new webp.Image();
+                await img.load(finalBuffer);
 
-        const json = {
-            'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
-            'sticker-pack-name': settings.packname || 'KnightBot',
-            'emojis': ['🤖']
-        };
+                const json = {
+                    'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
+                    'sticker-pack-name': settings.packname || 'Bot',
+                    'emojis': ['🤖']
+                };
 
-        const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00]);
-        const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
-        const exif = Buffer.concat([exifAttr, jsonBuffer]);
+                const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00]);
+                const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
+                img.exif = Buffer.concat([exifAttr, jsonBuffer]);
 
-        img.exif = exif;
+                finalBuffer = await img.save(null);
+            } catch (e) {
+                console.warn('EXIF skipped');
+            }
+        }
 
-        let finalBuffer = await img.save(null);
-
-        await sock.sendMessage(chatId, { 
-            sticker: finalBuffer
-        },{ quoted: messageToQuote });
+        await sock.sendMessage(chatId, { sticker: finalBuffer }, { quoted: messageToQuote });
 
         try {
             fs.unlinkSync(tempInput);
@@ -123,10 +113,8 @@ async function stickerCommand(sock, chatId, message) {
         } catch {}
 
     } catch (error) {
-        console.error('Error in sticker command:', error);
-        await sock.sendMessage(chatId, { 
-            text: 'Failed to create sticker! Try again later.'
-        });
+        console.error(error);
+        await sock.sendMessage(chatId, { text: 'Failed to create sticker!' });
     }
 }
 
