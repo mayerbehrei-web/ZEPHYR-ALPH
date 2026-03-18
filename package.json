@@ -12,6 +12,7 @@
     "start:fresh": "npm run reset-session && npm start",
     "install:panel": "npm install --legacy-peer-deps",
     "install:force": "npm install --force",
+    "postinstall": "npm install node-webpmux",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docker:build": "docker build -t docker run -e SESSION_ID=$SESSION_ID zephyr"
   },
