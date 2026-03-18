@@ -9,8 +9,7 @@ async function viewonceCommand(sock, chatId, message) {
     const captionMsg = `╭─❏ 𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇
 │✅ 𝘀𝘁𝗿𝗮𝘁𝗶𝗼𝗻 𝘁𝗲𝗿𝗺𝗶𝗻𝗲
 
-  \`tu croyais cacher quoi 
-  pathetique\`
+  \`Tout est dans la lumière\`
   power by ZEPHYR`;
 
     try {
