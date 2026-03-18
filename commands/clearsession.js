@@ -9,7 +9,7 @@ const channelInfo = {
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
             newsletterJid: '120363403933773291@newsletter',
-            newsletterName: '𝐈𝐍𝐅𝐈𝐍𝐈𝐗•𝐌𝐃',
+            newsletterName: '𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇',
             serverMessageId: -1
         }
     }
