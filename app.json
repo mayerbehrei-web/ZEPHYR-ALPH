@@ -1,0 +1,33 @@
+{
+  "name": "ZEPHYR-ALPH",
+  "description": "WhatsApp multi-device bot (Node.js/Baileys)",
+  "repository": "https://github.com/mayerbehrei-web/ZEPHYR-ALPH",
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "baileys",
+    "node"
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment",
+      "value": "production"
+    },
+    "TZ": {
+      "description": "Timezone",
+      "value": "Africa/Yaounde",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
