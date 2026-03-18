@@ -78,12 +78,24 @@ node index.js
 ## Crédits
 
 🤝 Rejoindre la communauté
-<div align="center"> <a href="https://t.me/+PTM3sQ1vo2g2OWU0"> <img src="https://img.shields.io/badge/TELEGRAM-00FFFF?style=for-the-badge&logo=telegram"/> </a> <a href="https://wa.me/TON_NUMERO"> <img src="https://img.shields.io/badge/WHATSAPP-25D366?style=for-the-badge&logo=whatsapp"/> </a> </div>
+<div align="center">
+  <a href="https://t.me/+PTPM3sQ1vo2g2OWU0">
+    <img src="https://img.shields.io/badge/TELEGRAM-00FFFF?style=for-the-badge&logo=telegram"/>
+  </a>
+
+  <a href="https://wa.me/+237 673560871">
+    <img src="https://img.shields.io/badge/WHATSAPP-25D366?style=for-the-badge&logo=whatsapp"/>
+  </a>
+</div>
+
+---
+
 👑 Crédit
 
 Dev : 🌬️ 𝐙𝐄𝐏𝐇𝐘𝐑
 
 Bot : ZEPHYR-ALPH
+
 ---
 
 ##📜 Licence
