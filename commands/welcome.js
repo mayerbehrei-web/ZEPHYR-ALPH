@@ -88,7 +88,7 @@ ${groupDesc}
 
             try {
 
-                let profilePicUrl = 'https://i.imgur.com/2wzGhpF.jpeg';
+                let profilePicUrl = 'https://imgur.com/a/gctWDxf.jpeg';
 
                 try {
                     const profilePic = await sock.profilePictureUrl(participantString, 'image');
