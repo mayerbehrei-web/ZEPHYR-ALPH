@@ -133,13 +133,13 @@ Le bot tourne sous **Node.js** et propose l’authentification via QR Code pour 
 
 ## 📄 Licence
 
-Ce projet est sous licence [MIT License](https://opensource.org/licenses/MIT) — voir le fichier [LICENSE](https://github.com/mayerbehrei-web/INFINIX-MD/blob/main/LICENSE).
+Ce projet est sous licence [MIT License](https://opensource.org/licenses/MIT) — voir le fichier [LICENSE](https://github.com/mayerbehrei-web/ZEPHYR-ALPH/blob/main/LICENSE).
 
 ---
 
 ## Crédits
 
-- [rebelle masque](https://github.com/mayerbehrei-web/)
+- [ZEPHYR](https://github.com/mayerbehrei-web/)
 - [télégram groupe](https://t.me/+PTM3sQ1vo2g2OWU0)
 - [WhatsApp groupe](https://chat.whatsapp.com/F9NbADb7L7v9SALfdBa9zq?mode=gi_t)
 ---
