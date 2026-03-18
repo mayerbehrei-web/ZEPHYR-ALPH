@@ -83,7 +83,7 @@ node index.js
     <img src="https://img.shields.io/badge/TELEGRAM-00FFFF?style=for-the-badge&logo=telegram"/>
   </a>
 
-  <a href="https://wa.me/+237 673560871">
+  <a href="https://wa.me/">
     <img src="https://img.shields.io/badge/WHATSAPP-25D366?style=for-the-badge&logo=whatsapp"/>
   </a>
 </div>
