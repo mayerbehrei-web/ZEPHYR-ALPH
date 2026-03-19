@@ -28,7 +28,7 @@ async function handleAntilinkCommand(sock, chatId, userMessage, senderId, isSend
                 }
                 const result = await setAntilink(chatId, 'on', 'delete');
                 await sock.sendMessage(chatId, { 
-                    text: result ? '*_Antilink a été activé✅ je suis prêt a supprimer les liens boss☠️_*' : '*_Failed to turn on Antilink_*' 
+                    text: result ? '*_Antilink a été activé✅ les liens sont interdit maintenant☠️_*' : '*_Failed to turn on Antilink_*' 
                 },{ quoted: message });
                 break;
 
