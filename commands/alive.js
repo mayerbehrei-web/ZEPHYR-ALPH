@@ -6,9 +6,9 @@ async function aliveCommand(sock, chatId, message) {
         const mode = settings?.commandMode ? settings.commandMode : "public";
 
         const message1 = `
-╭─────❏ 𝐈𝐍𝐅𝐈𝐍𝐈𝐗•𝐌𝐃
+╭─────❏ 𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇
 │ 🌟 *²⁰²⁶ Alive!* ✅
-│ 🤖 𝐈𝐍𝐅𝐈𝐍𝐈𝐗•𝐌𝐃
+│ 🤖 𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇
 │
 │ \`Version\` : v${version} 📉
 │ \`Statut\` : En ligne 🟢
@@ -23,7 +23,7 @@ async function aliveCommand(sock, chatId, message) {
 │
 │ Tape *.menu* pour voir la liste des commandes disponibles.
 ╰──────❏
-›  • \`REBELLE MASQUE\`
+›  • \`🌬️ZEPHYR\`
 `.trim();
 
         await sock.sendMessage(chatId, {
@@ -33,7 +33,7 @@ async function aliveCommand(sock, chatId, message) {
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363403933773291@newsletter',
-                    newsletterName: '𝐈𝐍𝐅𝐈𝐍𝐈𝐗•𝐌𝐃',
+                    newsletterName: '𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇',
                     serverMessageId: -1
                 }
             }
