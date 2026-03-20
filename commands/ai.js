@@ -147,8 +147,8 @@ async function aiCommand(sock, chatId, message) {
       `┃ ${question}\n` +
       `╰━━━━━━━━━━━━━━━━━━━━╯\n\n` +
       `${answer}\n\n` +
-      `✨ INFINIX•MD\n` +
-      `> BY REBELLE MASQUE`;
+      `✨ 𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇\n` +
+      `> BY zephyr`;
 
     await sock.sendMessage(chatId, { text: styled, ...channelInfo }, { quoted: message });
 
