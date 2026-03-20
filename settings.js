@@ -1,6 +1,6 @@
 const settings = {
   packname: '𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇',
-  author: 'zephyr',
+  author: 'zephyr 🌬️',
   botName: "𝐙𝐄𝐏𝐇𝐘𝐑•𝐀𝐋𝐏𝐇",
   botOwner: 'zephyr', // ton nom
   ownerNumber: '237673560871', //Saisissez votre numéro ici, sans le symbole +. Indiquez simplement l'indicatif du pays et le numéro, sans espace.
@@ -21,4 +21,4 @@ module.exports.prefix = process.env.PREFIX || 'zh';
 
 // Anti-mention de masse (suppression auto)
 module.exports.antiMention = { enabled: false, threshold: 5, adminBypass: true };
-//zphyr 🌬️
+//zephyr 🌬️
