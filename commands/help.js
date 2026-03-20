@@ -270,7 +270,7 @@ async function helpCommand(sock, chatId, message, channelLink) {
 *┋ ➥ ${prefix}repo*
 ╰─────────────────────⊷
 
-> 𝐏𝐎𝐰𝐞𝐫 𝐛𝐲 𝐫𝐞𝐛𝐞𝐥𝐥𝐞 𝐦𝐚𝐬𝐪𝐮𝐞`;
+> 𝐏𝐎𝐰𝐞𝐫 𝐛𝐲 zephyr 🌬️`;
 
     try {
         const imgPath = path.join(__dirname, '..', 'assets', 'bot_image.jpg');
