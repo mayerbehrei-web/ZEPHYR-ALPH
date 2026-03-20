@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: infinix-md
+    name: zephyr-alph
     env: node
     plan: free
     buildCommand: npm install
